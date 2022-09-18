@@ -35,8 +35,8 @@ Received JSON
 
 */
 
-//   console.log(req.body)
-//   console.log(req.body.bills)
+  console.log(req.body)
+  console.log(req.body.bills)
 //   console.log(req.body.pos_id)
   try {
     var transaction_details = await billModel.makeBill(

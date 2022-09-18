@@ -171,7 +171,7 @@ module.exports = {
     var succesful_transactions = [];
     var serial_nos = new Set();
 
-    // console.log(bills, pos_id)
+    console.log(bills, pos_id)
 
     for(var bill of bills){
         // console.log('bill:')
@@ -248,7 +248,7 @@ module.exports = {
         queries.push({
           sql: "INSERT INTO Transaction(transaction_id, cus_ph, amount, items, pos_id, status, offline_payment,discount) VALUES(?,?,?,?,?,?,?,?)",
           sqlParam:
-            [transaction_id, cus_ph, total_amount, billItems.length, pos_id, succesful, bill.offline_payment, bill.discount],
+            [transaction_id, cus_ph, total_amount, billItems.length, pos_id, bill.successful, bill.offline_payment, bill.discount],
         });
 
         transaction_ids.push(transaction_id);
@@ -285,7 +285,7 @@ module.exports = {
     if(failedTransactions.length == bills.length) return {
         "succesful" : false,
         "failed_transactions" : failedTransactions,
-        "succesful_transactions" : succesfulTransactions,
+        "succesful_transactions" : succesful_transactions,
         "transaction_ids" :  transaction_ids
     }
     else return {

@@ -94,7 +94,7 @@ INSERT INTO POS VALUES
 ('DLH_01_01_3SDK34', 'DLH', 01, 01, 4),
 ('DLH_01_02_3SDK34', 'DLH', 01, 02, 4),
 ('DLH_02_01_NSDKLN', 'DLH', 02, 01, 2), 
-('DLH_02_02_3SDK34', 'DLH', 02, 02, 2),
+('DLH_02_02_3SDK34', 'DLH', 02, 02, 2)
 ;
 
 SELECT * FROM POS Natural Join City Natural Join Store;
@@ -386,7 +386,7 @@ ALTER TABLE transaction ADD COLUMN offline_payment BOOL DEFAULT FALSE;
 ALTER TABLE transaction ADD COLUMN discount INT DEFAULT 0;
 ALTER TABLE bill DROP COLUMN transaction_id;
 ALTER TABLE bill ADD COLUMN transaction_id VARCHAR(64);
-ALTER TABLE active_warrranty ADD CONSTRAINT unique(serial_no);
+ALTER TABLE active_warranty ADD CONSTRAINT unique(serial_no);
 ALTER TABLE stock ADD COLUMN store_id INT;
 ALTER TABLE stock ADD CONSTRAINT FOREIGN KEY (store_id) REFERENCES store(store_id);
 SELECT * FROM stock;
@@ -404,6 +404,7 @@ UPDATE stock set store_id = (SELECT store_id FROM pos WHERE pos_id = 'KNP_01_02_
 select * from transaction;
 
 ALTER TABLE stock DROP CONSTRAINT fk_stockPos;
-ALTER TABLE transaction ADD CONSTRAINT FOREIGN KEY(transaction_id) REFERENCES BILL(transaction_id);
+-- ALTER TABLE transaction ADD CONSTRAINT FOREIGN KEY(transaction_id) REFERENCES BILL(transaction_id);
 Select * from transaction order by transaction_id desc;
-
+ALTER TABLE Customer ADD COLUMN address VARCHAR(100) DEFAULT '12/23, Random Road, Random City, Kanpur';
+ 
