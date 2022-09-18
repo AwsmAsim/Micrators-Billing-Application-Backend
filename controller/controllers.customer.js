@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const customerModel = require('../model/models.customer');
+const transactionModel = require('../model/models.transaction')
 
 
 router.get('/:cus_ph', async (req, res)=>{
@@ -56,5 +57,31 @@ router.post('/', async (req, res)=>{
 
 
 })
+
+router.post('/transactions/:cus_ph', async (req, res)=>{
+
+    var cus_ph = req.params.cus_ph
+
+    try{
+        var cus_details = await transactionModel.getAllCustomerTransactions(cus_ph);
+        if(cus_details == undefined || cus_details.length == 0){
+            res.status(404).send(
+              [
+                {"cus_ph" : ""}
+              ]  
+              );
+        }
+        res.status(200).send(cus_details);
+    }catch(err){
+        res.status(500).send({
+            "error" : err,
+        })
+    }
+
+
+
+})
+
+
 
 module.exports = router;
