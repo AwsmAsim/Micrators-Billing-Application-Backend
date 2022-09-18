@@ -26,8 +26,14 @@ module.exports = {
 
     setDetails: async (cus_ph, cus_name, email, address)=> {
         try{
-            var cus_details = await db.executeQuery('INSERT INTO customer VALUES(?,?,?,?,?)', [cus_ph, cus_name, email, 0, address]);
-            return true;
+            if(await db.executeQuery('Select * from cutomer where cus_id = ?', [cus_ph]).length == 0){
+                var cus_details = await db.executeQuery('INSERT INTO customer VALUES(?,?,?,?,?)', [cus_ph, cus_name, email, 0, address]);
+                return true;
+            }else{
+                var cus_details = await db.executeQuery('Update customer set cus_name = ?, email = ?, address = ? where cus_ph = ?', [cus_name, email, address, cus_ph]);
+                return true;
+            }
+            
         }catch(err){
             console.log(err);
             throw Error('Internal error occured');

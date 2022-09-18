@@ -97,6 +97,7 @@ Received JSON
                 cus_ph: ...,
                 discount: ...,
                 successful: ...,
+                email: ....,
                 offline_payment: True/False,
                 billItems: [
                     {
@@ -224,6 +225,16 @@ module.exports = {
               itemBill.warranty_id,
             ],
           });
+
+          if(itemBill.email != undefined){
+            queries.push({
+              sql: "Update Customer SET email = ? where cus_ph = ?))",
+              sqlParam: [
+                itemBill.email_id,
+                itemBill.cus_ph
+              ],
+            });
+          }
 
           if(serial_nos.has(itemBill.serial_no) == false){
             var sql = "select product_id, product_name, count(product_id) as available, store_name, city_name from city natural join pos natural join store natural join stock natural join product where sold = 0 AND store_id = (SELECT store_id from pos where pos_id = ?) AND product_id = (Select product_id from stock where serial_no = ?) group by product_name"
