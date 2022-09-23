@@ -5,8 +5,8 @@ var transporter = nodeMailer.createTransport({
     host: 'smtp-relay.sendinblue.com',
     port: 587,
     auth: {
-        user: 'facebook.asim159@gmail.com',
-        pass: 'tANzFSM2197nIV6D'
+        user: 'YOUR EMAIL',
+        pass: 'YOUT PASSWORD'
     }
 });
 
